@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Supplier Form</title>
+    <style>
+        table{
+            font-family: ariel, sand-serif, serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+        tr:nth-child(even){
+            background-color: #dddddd;
+        }
+    </style>
+</head>
+<body>
+
+<h2> Suppliers Found </h2>
+<table style="width:70%">
+    <tr>
+        <th>Supplier ID</th>
+        <th>Supplier Name</th>
+    </tr>
+    {%  for supplier in S %}
+        <tr>
+            <th>{{ supplier.id }}</th>
+            <th>{{ supplier.supp_name }}</th>
+        </tr>
+    {% endfor %}
+</table>
+<br>
+
+<h2> Add New Supplier </h2>
+<form method="POST">
+{% csrf_token %}
+<table style="width:70%">
+    {% for field in form %}
+        <tr>
+            <td>{{ field.label }}</td>
+            <td>{{ field }}</td>
+        </tr>
+    {% endfor %}
+</table>
+<br>
+<button type="submit">Submit</button>
+</form>
+
+</body>
+</html>

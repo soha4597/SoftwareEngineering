@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Customer Form</title>
+    <style>
+        table{
+            font-family: ariel, sand-serif, serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+        tr:nth-child(even){
+            background-color: #dddddd;
+        }
+    </style>
+</head>
+<body>
+
+<h2> Customers Found </h2>
+<table style="width:70%">
+    <tr>
+        <th>Customer ID</th>
+        <th>Customer Name</th>
+        <th>Customer Location</th>
+    </tr>
+    {%  for customer in S %}
+        <tr>
+            <th>{{ customer.id }}</th>
+            <th>{{ customer.cust_name }}</th>
+            <th>{{ customer.cust_location }}</th>
+        </tr>
+    {% endfor %}
+</table>
+
+<br>
+
+<h2> Add New Customer </h2>
+<form method="POST">
+{% csrf_token %}
+<table style="width:70%">
+    {% for field in form %}
+        <tr>
+            <td>{{ field.label }}</td>
+            <td>{{ field }}</td>
+        </tr>
+    {% endfor %}
+</table>
+<br>
+<button type="submit">Submit</button>
+</form>
+
+</body>
+</html>

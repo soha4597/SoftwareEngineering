@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Order Form</title>
+    <style>
+        table{
+            font-family: ariel, sand-serif, serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+        tr:nth-child(even){
+            background-color: #dddddd;
+        }
+    </style>
+</head>
+<body>
+
+<h2> Previous Orders </h2>
+<table style="width:70%">
+    <tr>
+        <th>Order ID</th>
+        <th>Customer ID</th>
+        <th>Total Price</th>
+        <th>Delivery Fee</th>
+        <th>Order DateTime</th>
+    </tr>
+    {%  for order in S %}
+        <tr>
+            <th>{{ order.id }}</th>
+            <th>{{ order.order_customerID.id }}</th>
+            <th>{{ order.order_totalPrice }}</th>
+            <th>{{ order.order_deliveryFee }}</th>
+            <th>{{ order.order_datetime }}</th>
+        </tr>
+    {% endfor %}
+</table>
+<br>
+<h2> Add new Order </h2>
+<form method="POST">
+{% csrf_token %}
+<table style="width:70%">
+    {% for field in form %}
+        <tr>
+            <td>{{ field.label }}</td>
+            <td>{{ field }}</td>
+        </tr>
+    {% endfor %}
+</table>
+<br>
+
+<p><a href="add_request.html">Add Items</a></p>
+
+</form>
+
+</body>
+</html>
