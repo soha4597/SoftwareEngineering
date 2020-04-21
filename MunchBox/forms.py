@@ -1,14 +1,14 @@
 from django.forms import ModelForm
-from .models import Customer,Supplier,Product,Supply,Order,Request
+from .models import Supplier,Product,Supply,Order,Request
 from django import forms
 from django.utils.safestring import mark_safe
 
 # Create the customer form class.
-class CreateCustomerForm(ModelForm):
-	class Meta:
-		model = Customer
-		#fields = "__all__"
-		fields = ['cust_name', 'cust_location']
+#class CreateCustomerForm(ModelForm):
+#	class Meta:
+#		model = Customer
+#		#fields = "__all__"
+#		fields = ['cust_name', 'cust_location']
 
 # Create the supplier form class.
 class CreateSupplierForm(ModelForm):

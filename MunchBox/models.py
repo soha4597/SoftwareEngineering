@@ -1,13 +1,14 @@
 from django.db import models
 from django.core.validators import MinValueValidator
+from django.conf import settings
 
 # Create your models here.
-class Customer(models.Model):
-    cust_name = models.CharField(verbose_name="Customer Name", max_length=30)
-    cust_location = models.CharField(verbose_name="Customer Location",max_length=50)
+#class Customer(models.Model):
+ #   cust_name = models.CharField(verbose_name="Customer Name", max_length=30)
+  #  cust_location = models.CharField(verbose_name="Customer Location",max_length=50)
 
-    def get_id(self):
-        return self.id
+   # def get_id(self):
+    #    return self.id
 
 class Supplier(models.Model):
     supp_name = models.CharField(verbose_name="Supplier Name", max_length=30)
@@ -22,7 +23,7 @@ class Product(models.Model):
     prod_price = models.IntegerField(verbose_name="Product Price (in LL)")
     prod_bestSeller = models.CharField(verbose_name="Product Best Seller",max_length=30,default="Unknown Yet")
 
-    members = models.ManyToManyField(Supplier, through='Supply',through_fields=('supply_productID','supply_supplierID'))
+    suppliers = models.ManyToManyField(Supplier, through='Supply',through_fields=('supply_productID','supply_supplierID'))
 
     def get_id(self):
         return self.id
@@ -35,7 +36,8 @@ class Supply(models.Model):
     supply_cost = models.IntegerField(verbose_name="Cost of 1 item (in LL)",validators=[MinValueValidator(1)])
 
 class Order(models.Model):
-    order_customerID = models.ForeignKey(Customer,on_delete=models.CASCADE,verbose_name="Customer ID",default=None)
+    order_customerID = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE, verbose_name="Customer ID",default=None, related_name = 'order')
+    # When we build relations with the user model, this is what we use.
     order_totalPrice = models.IntegerField(verbose_name="Total Price",default=0)
     order_deliveryFee = models.IntegerField(verbose_name="Delivery Fee",validators=[MinValueValidator(1)],default=1)
     order_datetime = models.DateTimeField(auto_now_add=True,blank=True,verbose_name="Date and time of order")

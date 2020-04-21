@@ -17,7 +17,18 @@ from django.contrib import admin
 from django.urls import path
 from django.conf.urls import include, url
 
+from user import urls as user_urls
+from owner import urls as owner_urls
+
+admin.site.site_header = 'MunchBox Admin'
+admin.site.site_title = 'MunchBox Site Admin'
+
 urlpatterns = [
     path('admin/', admin.site.urls),
+    url(r'^owner/',
+        include(owner_urls)),
+    url(r'^user/',
+        include(user_urls)),
     url(r'',include('MunchBox.urls')),
+    # Next to each url in user, we append dj-auth so that we don't hav problems with admin login and logout views.
 ]

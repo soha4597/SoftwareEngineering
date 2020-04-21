@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <title>
+      {% block title %}
+        MunchBox
+      {% endblock %}
+    </title>
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    {% block head %}
+        {# For any template that inherits this base, we can overwrite this block #}
+    {% endblock %}
+
+  </head>
+
+  <body>
+      {% if messages %}
+              {% for message in messages %}
+                {% if message.tags %}
+                  <li class="{{ message.tags }}">
+                {% else %}
+                  <li>
+                {% endif %}
+                {{ message }}</li>
+              {% endfor %}
+        {# This displays any message that mau have been sent with the request #}
+      {% endif %}
+
+      <main>
+        {% block content %}
+          This is default content!
+            {# This Block must be overwritten #}
+        {% endblock %}
+      </main>
+
+  </body>
+
+</html>
+

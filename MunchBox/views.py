@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import loader
-from .forms import CreateCustomerForm,CreateSupplierForm,CreateProductForm,CreateSupplyForm,CreateOrderForm,CreateRequestForm
-from .models import Customer,Supplier,Product,Supply,Order,Request
+from .forms import CreateSupplierForm,CreateProductForm,CreateSupplyForm,CreateOrderForm,CreateRequestForm
+from .models import Supplier,Product,Supply,Order,Request
 
 # Create your views here.
 
@@ -15,21 +15,21 @@ def index(request):
     #[Order.objects.filter(id=(i + 1)).delete() for i in range(20)]
     #[Request.objects.filter(id=(i+1)).delete() for i in range(20)]
 
-    return render(request, 'index.html')
+    return render(request, 'base.html')
 
-def add_customer(request):
-    if request.method == 'POST':
-        form = CreateCustomerForm(request.POST)
-        if form.is_valid():
-            customerform = form.cleaned_data
-            cust_name = customerform['cust_name']
-            cust_location = customerform['cust_location']
-            Customer.objects.create(cust_name=cust_name, cust_location=cust_location)
-            return render(request, 'index.html')
-    else:
-        form = CreateCustomerForm()
-    S = Customer.objects.all()
-    return render(request, 'add_customer.html', {'form': form, 'S': S})
+#def add_customer(request):
+  #  if request.method == 'POST':
+   #     form = CreateCustomerForm(request.POST)
+    #    if form.is_valid():
+    #        customerform = form.cleaned_data
+    #        cust_name = customerform['cust_name']
+    #        cust_location = customerform['cust_location']
+    #        Customer.objects.create(cust_name=cust_name, cust_location=cust_location)
+    #        return render(request, 'index.html')
+    #else:
+     #   form = CreateCustomerForm()
+    #S = Customer.objects.all()
+    #return render(request, 'add_customer.html', {'form': form, 'S': S})
 
 def add_supplier(request):
     if request.method == 'POST':

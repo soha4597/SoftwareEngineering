@@ -4,8 +4,8 @@ from . import views
 
 
 urlpatterns = [
-    url(r'^$',views.index),
-    url(r'add_customer',views.add_customer),
+    url(r'^$',views.index, name = 'Base_Webpage'),
+    # url(r'add_customer',views.add_customer),
     url(r'add_supplier',views.add_supplier),
     url(r'add_product',views.add_product),
     url(r'supply_product',views.supply_product),

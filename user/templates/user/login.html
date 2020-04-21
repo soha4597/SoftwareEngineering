@@ -1,0 +1,16 @@
+{% extends parent_template|default:"user/base_user.html" %}
+
+{% block title %}
+{{ block.super }} - Login
+{% endblock %}
+
+{% block content %}
+      {% include "user/login_form.html" %}
+
+      <ul>
+        <li><a href="{% url 'create' %}">
+          Register New Account</a></li>
+      </ul>
+    <li><a href="{% url 'resend_activation' %}">
+          Lost Activation E-Mail?</a></li>
+{% endblock %}

@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+from .log_filters import ManagementFilter
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -29,16 +30,64 @@ ALLOWED_HOSTS = ['*']
 
 
 # Application definition
+SITE_ID = 1
 
 INSTALLED_APPS = [
     'django.contrib.admin',
+    'django.contrib.sites',
+    'django.contrib.flatpages',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'phonenumber_field',
     'django.contrib.staticfiles',
     'MunchBox.apps.MunchboxConfig',
+    'user.apps.UserConfig',
+    'core',
 ]
+
+verbose = (
+    "[%(asctime)s] %(levelname)s "
+    "[%(name)s:%(lineno)s] %(message)s")
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'filters': {
+        'remove_migration_sql': {
+            '()': ManagementFilter,
+        },
+    },
+    'handlers': {
+        'console': {
+            'filters': ['remove_migration_sql'],
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'formatters': {
+        'verbose': {
+            'format': verbose,
+            'datefmt': "%Y-%b-%d %H:%M:%S"
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+            'formatter': 'verbose'
+        },
+    },
+}
+
+SERVER_EMAIL = 'sohawahab@hotmail.com'
+DEFAULT_FROM_EMAIL = 'sohawahab@hotmail.com'
+
+from django.urls import reverse_lazy
+
+LOGIN_REDIRECT_URL = reverse_lazy('Base_Webpage')
+LOGIN_URL = reverse_lazy('login')
+LOGOUT_URL = reverse_lazy('logout')
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

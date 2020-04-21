@@ -1,0 +1,22 @@
+{% extends parent_template|default:"user/base_user.html" %}
+
+{% block title %}
+{{ block.super }} - Create Account
+{% endblock %}
+
+{% block content %}
+        <a href="{% url 'resend_activation' %}">
+          Lost Activation E-Mail?</a>
+
+      </div>
+      <form
+          action="{% url 'create' %}"
+          method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">
+          Create New Account</button>
+      </form>
+    </div>
+  </div>
+{% endblock %}

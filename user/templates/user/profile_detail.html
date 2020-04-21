@@ -1,0 +1,28 @@
+{% extends parent_template|default:"user/base_user.html" %}
+{% load partial_post_list %}
+
+{% block title %}
+{{ block.super }} -
+{{ profile.user.get_username }}'s Profile
+{% endblock %}
+
+{% block content %}
+
+    <h2>About {{ profile.user.get_username }}</h2>
+
+    {% format_post_list profile.user %}
+
+
+    {% if user.pk == profile.user.pk %}
+        <ul >
+          <li><a href="{{ profile.get_update_url }}">
+            Edit Your Profile</a></li>
+        </ul>
+    {% endif%}
+
+        <ul >
+          <li><a href="{% url '' %}">
+            Go Back to Navigate the site</a></li>
+        </ul>
+
+{% endblock %}

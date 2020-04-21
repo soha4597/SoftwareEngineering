@@ -1,0 +1,18 @@
+{% extends parent_template|default:"user/base_user.html" %}
+{% load display_form %}
+
+{% block title %}
+{{ block.super }} - Update Profile
+{% endblock %}
+
+
+{% block content %}
+  <form
+action="{{ profile.get_update_url }}"
+method="post">
+{% csrf_token %}
+{{ form.as_p }}
+<button type="submit">
+Update Profile</button>
+</form>
+{% endblock %}
