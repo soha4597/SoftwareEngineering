@@ -26,7 +26,7 @@ admin.site.site_title = 'MunchBox Site Admin'
 urlpatterns = [
     path('admin/', admin.site.urls),
     url(r'^owner/',
-        include(owner_urls)),
+        include(owner_urls), name = 'owner'),
     url(r'^user/',
         include(user_urls)),
     url(r'',include('MunchBox.urls')),
