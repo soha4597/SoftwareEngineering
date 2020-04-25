@@ -35,17 +35,14 @@ class Profile(models.Model):
     # to call public profile. May be needed in the future.
     def get_absolute_url(self):
         return reverse(
-            'dj-auth:public_profile',
+            'public_profile',
             kwargs={'slug': self.slug})
 
     # This allows us to quickly get the url pattern sing the profile object
     # to call profile update
     def get_update_url(self):
-        return reverse('dj-auth:profile_update')
+        return reverse('profile_update')
 
-    def natural_key(self):
-        return (self.slug,)
-    natural_key.dependencies = ['user.user']
 
 # Manager class written to make the interaction with the User Model easier
 #class UserManager(BaseUserManager):
